@@ -22,16 +22,9 @@ end
 
 # -lオプション
 def ocnvert_to_per(str)
-  per_str = []
-  "0o#{str}".oct.to_s(2).each_char.with_index do |c, i|
-    per_str << case i
-               when 0
-                 c == '1' ? 'r' : '-'
-               when 1
-                 c == '1' ? 'w' : '-'
-               when 2
-                 c == '1' ? 'x' : '-'
-               end
+  per_str = "0o#{str}".oct.to_s(2).each_char.with_index.map do |c, i|
+    permissions = %w[r w x]
+    c == '1' ? permissions[i] : '-'
   end
   per_str.join
 end
@@ -46,7 +39,7 @@ def l_opt(dir, dir_name)
   bytesize = format('%2d', stat.size) # バイトサイズ
   at_update = "#{format('%2d', stat.mtime.month)} #{format('%2d', stat.mtime.day)} #{format('%02d', stat.mtime.hour)}:#{format('%02d', stat.mtime.min)}" # 更新時刻
 
-  per_special = ocnvert_to_per(permission[2])
+  # per_special = ocnvert_to_per(permission[2])
   per_owner = ocnvert_to_per(permission[3])
   per_group = ocnvert_to_per(permission[4])
   per_other = ocnvert_to_per(permission[5])
