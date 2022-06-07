@@ -39,7 +39,6 @@ def l_opt(dir, dir_name)
   bytesize = format('%2d', stat.size) # バイトサイズ
   at_update = "#{format('%2d', stat.mtime.month)} #{format('%2d', stat.mtime.day)} #{format('%02d', stat.mtime.hour)}:#{format('%02d', stat.mtime.min)}" # 更新時刻
 
-  # per_special = ocnvert_to_per(permission[2])
   per_owner = ocnvert_to_per(permission[3])
   per_group = ocnvert_to_per(permission[4])
   per_other = ocnvert_to_per(permission[5])
